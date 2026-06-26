@@ -1,0 +1,197 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-sand text-ink font-sans antialiased;
+    font-feature-settings: "kern", "liga", "calt";
+  }
+
+  /* — Bilingual type swap — Arabic gets Amiri / IBM Plex Sans Arabic. */
+  [dir="rtl"] body {
+    @apply font-sans-ar;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-serif;
+    text-wrap: balance;
+  }
+
+  [dir="rtl"] h1,
+  [dir="rtl"] h2,
+  [dir="rtl"] h3 {
+    @apply font-serif-ar;
+  }
+
+  ::selection {
+    background-color: #9c4221;
+    color: #f7f4ef;
+  }
+
+  :focus-visible {
+    outline: 2px solid #9c4221;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  /* ——— Buttons ——————————————————————————————————————————— */
+
+  /* Primary: flat inked terracotta, with a quiet press. No glow. */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-terracotta px-7 py-3
+           text-base font-medium text-sand transition-all duration-200
+           hover:bg-terracotta-dark active:translate-y-px
+           focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-hairline-strong
+           bg-transparent px-6 py-3 text-base font-medium text-ink transition-colors duration-200
+           hover:bg-sand-deep active:translate-y-px focus-visible:outline-none;
+  }
+
+  /* Small inline action (copy, etc.). */
+  .btn-mini {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-hairline bg-sand/60 px-3 py-1.5
+           text-xs font-medium text-ink-soft transition-colors hover:border-hairline-strong
+           hover:text-ink focus-visible:outline-none;
+  }
+
+  /* ——— Surfaces ——————————————————————————————————————————— */
+
+  /* Flat card: hairline border, generous padding, no shadow. */
+  .card {
+    @apply rounded-2xl border border-hairline bg-sand/70 p-6 sm:p-8;
+  }
+
+  /* Eyebrow / kicker label. */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-terracotta;
+  }
+
+  [dir="rtl"] .eyebrow {
+    letter-spacing: 0.08em;
+  }
+
+  /* The little terracotta tick that precedes an eyebrow. */
+  .eyebrow::before {
+    content: "";
+    @apply inline-block h-px w-6 bg-terracotta;
+  }
+
+  /* Section index numeral (01 / 02) used as a masthead device. */
+  .index-num {
+    @apply font-serif text-sm font-semibold tabular-nums text-terracotta;
+  }
+
+  .field-label {
+    @apply text-xs font-semibold uppercase tracking-wider text-ink-faint;
+  }
+
+  [dir="rtl"] .field-label {
+    @apply tracking-normal;
+  }
+
+  /* Idea suggestion chip on the form. */
+  .chip {
+    @apply rounded-full border border-hairline bg-sand px-3.5 py-1.5 text-sm text-ink-soft
+           transition-colors hover:border-terracotta hover:text-terracotta
+           focus-visible:outline-none;
+  }
+}
+
+@layer utilities {
+  .rule {
+    @apply border-t border-hairline;
+  }
+
+  /* Drop cap for the opening of an editorial lead. */
+  .dropcap::first-letter {
+    @apply float-left font-serif text-[3.6rem] font-semibold leading-[0.8] text-terracotta;
+    margin-inline-end: 0.08em;
+    margin-top: 0.06em;
+  }
+
+  [dir="rtl"] .dropcap::first-letter {
+    @apply float-right;
+  }
+
+  /* Tabular figures for numerals (costs, steps). */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Faint printed-paper grain over the sand. Subtle — adds tooth, not noise. */
+  .grain::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.5;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  }
+
+  /* Shimmer sweep for skeletons. */
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  .shimmer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.45),
+      transparent
+    );
+    animation: shimmer 1.6s infinite;
+  }
+  [dir="rtl"] .shimmer::after {
+    animation-direction: reverse;
+  }
+}
+
+/* Print: drop chrome, keep the plan clean on paper / PDF. */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  .grain::before {
+    display: none;
+  }
+  body {
+    background: #ffffff;
+  }
+  .card {
+    border-color: #cfc8ba;
+    background: #ffffff;
+  }
+}
+
+/* Respect reduced-motion preferences. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
