@@ -3,8 +3,7 @@
 **Built for the Tatweer Hackathon · Challenge 1: Taking the first entrepreneurial step**
 **Track: Solutions for rural communities · Al Qua'a, Al Ain, UAE**
 
-> Live demo: _[add your Vercel URL here]_
-> Demo video: _[add link to demo.mp4 / unlisted YouTube here]_
+> Live demo: https://ibda-beta.vercel.app
 
 Ibda turns "I have an idea" into "here is my first move." A first-time founder in Al Qua'a describes their idea or skill in one screen, and Ibda returns a concrete, local, do-this-week starting plan: a direction, three first actions, the UAE licence they likely need and what it costs, a simple business model, and a script for approaching their first customer. In Arabic or English.
 
