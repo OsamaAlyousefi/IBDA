@@ -79,7 +79,7 @@ Ibda is built to replicate, not just to demo:
 
 ## 6. Falsifiability and evidence
 
-Every claim above is written to be checked, not taken on faith. The live URL and the demo video let a judge reproduce each claim directly. The plan structure is a fixed, typed contract (`lib/types.ts`), so what the UI shows is exactly what the model is required to return.
+Every claim above is written to be checked, not taken on faith. The plan structure is a fixed, typed contract (`lib/types.ts`), so what the UI shows is exactly what the model is required to return.
 
 _Honest limitation we are not hiding:_ the licensing figures are model-generated guidance, not a live government data feed. They are framed in the product as ranges and starting points, not exact quotes. The clear next step to strengthen this is to ground the licensing section in verified Abu Dhabi DED / TAMM fee data per activity — a concrete, scoped improvement rather than a vague promise.
 
